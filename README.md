@@ -3,6 +3,19 @@ Disco Map Reduce Project
 
 # Input
 
+## Development
+
+Requirements
+ - Node.js
+ - Command line
+
+```
+npm install
+gulp run
+```
+
+## Description
+
 Log entry model
 ```
 nodeIp  timestamp provider  clientIp  originServer/sessionId/channel/qualityId/fragmentId   userAgent   totalBytesSent  bytesSentFromCache
