@@ -15,9 +15,9 @@ describe("Payload", function() {
   });
   describe("Generate", function() {
     it("Case 1", function() {
-      var payload = new Payload({ amplitude: 4, minimum: 4 });
-      var now = moment();
-      expect(payload.timestamps(now.year(), now.month(), now.date()).size).to.equal(2445);
+      var payload = new Payload({ amplitude: 4, minimum: 10 });
+      var now = moment({ hour: 22 });
+      expect(payload.timestamps(now).size).to.equal(18);
     });
   });
 });

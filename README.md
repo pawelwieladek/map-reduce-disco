@@ -5,13 +5,28 @@ Disco Map Reduce Project
 
 ## Development
 
-Requirements
+### Requirements
  - Node.js
  - Command line
 
+### Commands
 ```
+cd generate
 npm install
+gulp build
+```
+Then
+```
 gulp run
+```
+or
+```
+node dist/app.js
+```
+
+### Crontab entry
+```
+0,5,10,15,20,25,30,35,40,45,50,55 * * * * /usr/local/bin/node PATH_TO_PROJECT/generate/dist/app.js
 ```
 
 ## Description

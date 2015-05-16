@@ -25,29 +25,25 @@ class Payload extends PayloadRecord {
     return this.amplitude * Math.cos(x) + (this.minimum + this.amplitude);
   }
 
-  timestamps(year, month, day) {
-    return Range(0, 24).map(hour => {
-      return Range(0, 60, this.range).map(min => {
-        var time = moment({
-          year: year,
-          month: month,
-          day: day,
-          hour: hour,
-          minute: min
-        });
-        return Range(0, this.repeats(time)).map(() => {
-          var timestamp = chance.integer({
-            min: time.unix(),
-            max: time.add({ minutes: this.range }).unix()
-          });
-          return timestamp;
-        });
-      })
-    }).flatten().toList();
+  timestamps(time) {
+    return Range(0, this.repeats(time)).map(() => {
+      var timestamp = chance.integer({
+        min: time.unix(),
+        max: time.add({ minutes: this.range }).unix()
+      });
+      return timestamp;
+    });
   }
 
-  logs(year, month, day) {
-    return this.timestamps(year, month, day).map(timestamp => {
+  logs(year, month, day, hour, minute) {
+    var time = moment({
+      year: year,
+      month: month,
+      day: day,
+      hour: hour,
+      minute: minute
+    });
+    return this.timestamps(time).map(timestamp => {
       return Log.create(timestamp);
     });
   }
