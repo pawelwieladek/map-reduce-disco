@@ -22,5 +22,3 @@ gulp.task("build", ["clean"], function () {
         .pipe(babel())
         .pipe(gulp.dest("dist"));
 });
-
-gulp.task("run", ["build"], shell.task(["node dist/app.js"]));
