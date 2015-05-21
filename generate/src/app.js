@@ -17,7 +17,7 @@ console.log({ hour: now.hour(), minute: now.minute(), size: logs.size });
 var stream = fs.createWriteStream(filename);
 stream.once("open", function(fd) {
   logs.forEach((log, index) => {
-    stream.write(log.toString());
+    stream.write(log.toString() + "\n");
     if (index % 1000 === 0) process.stdout.write(".");
   });
   process.stdout.write("\n");
