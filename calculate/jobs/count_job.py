@@ -1,8 +1,9 @@
 from disco.core import Job, result_iterator
 
 def map(line, params):
-    for word in line.split("\t"):
-        yield word, 1
+    from model.log import Log
+    log = Log(line)
+    yield log.provider, log.total_bytes
 
 def reduce(iter, params):
     from disco.util import kvgroup
