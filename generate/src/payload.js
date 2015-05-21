@@ -6,30 +6,29 @@ var Log = require("./log");
 var milisecsInDay = moment.duration({ hours: 24 });
 
 var PayloadRecord = Record({
-  range: 5,
-  peak: 22,
-  minimum: 0,
-  amplitude: 1,
-  tolerance: 0
+  minutes: 5,
+  peakHour: 22,
+  min: 0,
+  max: 1
 });
 
 class Payload extends PayloadRecord {
 
   get milisecsFromPeak() {
-    return moment.duration({ hours: this.peak });
+    return moment.duration({ hours: this.peakHour });
   }
 
   repeats(time) {
     var currentMilisecs = moment.duration({ hours: time.hour(), minutes: time.minute()});
     var x = 2 * Math.PI * (currentMilisecs - this.milisecsFromPeak) / milisecsInDay;
-    return this.amplitude * Math.cos(x) + (this.minimum + this.amplitude);
+    return Math.round((this.max - this.min) * Math.pow(Math.cos(x / 2), 2) + this.min);
   }
 
   timestamps(time) {
     return Range(0, this.repeats(time)).map(() => {
       var timestamp = chance.integer({
         min: time.unix(),
-        max: time.add({ minutes: this.range }).unix()
+        max: time.add({ minutes: this.minutes }).unix()
       });
       return timestamp;
     });

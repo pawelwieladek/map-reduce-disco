@@ -4,8 +4,8 @@ var moment = require("moment");
 var Payload = require("./payload");
 
 var payload = new Payload({
-  amplitude: 10,
-  minimum: 20
+  max: 40,
+  min: 20
 });
 
 var now = moment();
