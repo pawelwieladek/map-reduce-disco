@@ -12,7 +12,8 @@
     "babel": "^5.1.13",
     "chance": "^0.7.4",
     "immutable": "^3.7.2",
-    "moment": "^2.10.2"
+    "moment": "^2.10.2",
+    "stdio": "^0.2.7"
   },
   "devDependencies": {
     "chai": "^2.3.0",

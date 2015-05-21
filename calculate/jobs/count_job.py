@@ -12,7 +12,7 @@ def reduce(iter, params):
     for word, counts in kvgroup(sorted(iter)):
         yield word, sum(counts)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     input_file = sys.argv[1]
     current_directory = os.path.realpath(os.path.dirname(os.path.realpath(__file__))) + "/"
     job = Job().run(required_files=[os.path.normpath(current_directory + "../model/log.py")],
