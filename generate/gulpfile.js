@@ -5,7 +5,10 @@ var shell = require("gulp-shell");
 var del = require("del");
 
 gulp.task("clean", function (cb) {
-  del(["dist/**/*.js"], cb);
+  del([
+    "dist/**/*.js",
+    "target/logs-*"
+  ], cb);
 });
 
 gulp.task("test", function () {

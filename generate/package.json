@@ -1,4 +1,10 @@
 {
+  "description": "Map reduce project",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pawelwieladek/map-reduce-tv-channels.git"
+  },
+  "private": true,
   "name": "map-reduce-tv-channels",
   "version": "1.0.0",
   "description": "",

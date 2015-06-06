@@ -4,6 +4,10 @@ from datetime import datetime
 
 def run():
     current_directory = os.path.realpath(os.path.dirname(os.path.realpath(__file__)))
+    local("cd generate")
+    local("npm install")
+    local("gulp build")
+    local("cd ..")
 
     generate_task = current_directory + "/generate/dist/app.js"
     local("node " + generate_task + " --verbose")
