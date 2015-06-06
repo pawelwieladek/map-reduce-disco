@@ -13,12 +13,11 @@ def reduce(iter, params):
         yield word, sum(counts)
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        raise Exception("Filename must be given")
-    input_file = sys.argv[1]
     current_directory = os.path.realpath(os.path.dirname(os.path.realpath(__file__))) + "/"
+    input_directory = os.path.normpath(current_directory + "../../generate/target/")
+    input_files = [file for file in os.listdir(input_directory) if os.path.isfile(os.path.join(input_directory, file))]
     job = Job().run(required_files=[os.path.normpath(current_directory + "../model/log.py")],
-                    input=[os.path.normpath(current_directory + "../../generate/target/" + input_file)],
+                    input=input_files,
                     map=map,
                     reduce=reduce)
     for word, count in result_iterator(job.wait(show=True)):

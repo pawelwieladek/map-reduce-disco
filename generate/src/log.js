@@ -19,7 +19,7 @@ var LogRecord = Record({
 });
 
 class Log extends LogRecord {
-  static create(timestamp) {
+  static create(nodeIp, timestamp) {
     var totalBytesSent = chance.integer({
       min: 1024,
       max: 2097152
@@ -31,7 +31,7 @@ class Log extends LogRecord {
     var provider = chance.pick(Map(Datasets.provider).valueSeq().toJS());
     var channel = chance.pick(Map(Datasets.channel).get(provider));
     return new Log({
-      nodeIp: chance.pick(Datasets.nodeIp),
+      nodeIp: nodeIp,
       timestamp: timestamp,
       provider: provider,
       clientIp: chance.ip(),

@@ -1,5 +1,5 @@
 var { Record, List, Range } = require("immutable");
-var chance = require("chance").Chance();
+var Chance = require("chance");
 var moment = require("moment");
 var Log = require("./log");
 
@@ -9,8 +9,13 @@ var PayloadRecord = Record({
   minutes: 5,
   peakHour: 22,
   min: 0,
-  max: 1
+  max: 1,
+  tolerance: 0
 });
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 class Payload extends PayloadRecord {
 
@@ -21,10 +26,12 @@ class Payload extends PayloadRecord {
   repeats(time) {
     var currentMilisecs = moment.duration({ hours: time.hour(), minutes: time.minute()});
     var x = 2 * Math.PI * (currentMilisecs - this.milisecsFromPeak) / milisecsInDay;
-    return Math.round((this.max - this.min) * Math.pow(Math.cos(x / 2), 2) + this.min);
+    var repeats = Math.round((this.max - this.min) * Math.pow(Math.cos(x / 2), 2) + this.min);
+    return getRandomInt(repeats - this.tolerance, repeats + this.tolerance);
   }
 
   timestamps(time) {
+    var chance = new Chance();
     return Range(0, this.repeats(time)).map(() => {
       var timestamp = chance.integer({
         min: time.unix(),
@@ -34,7 +41,7 @@ class Payload extends PayloadRecord {
     });
   }
 
-  logs(year, month, day, hour, minute) {
+  logs(nodeIp, year, month, day, hour, minute) {
     var time = moment({
       year: year,
       month: month,
@@ -43,7 +50,7 @@ class Payload extends PayloadRecord {
       minute: minute
     });
     return this.timestamps(time).map(timestamp => {
-      return Log.create(timestamp);
+      return Log.create(nodeIp, timestamp);
     });
   }
 }
