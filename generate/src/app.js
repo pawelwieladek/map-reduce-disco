@@ -9,19 +9,19 @@ var options = stdio.getopt({
     key: "M",
     args: 1,
     description: "Maximum number of generated logs",
-    default: 1000
+    default: 5000
   },
   "min": {
     key: "m",
     args: 1,
     description: "Minimum number of generated logs",
-    default: 500
+    default: 1000
   },
   "tolerance": {
     key: "t",
     args: 1,
     description: "Tolerance",
-    default: 10
+    default: 100
   },
   "verbose": {
     key: "v",
