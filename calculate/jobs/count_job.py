@@ -3,6 +3,7 @@ import sys
 import re
 import time
 import requests
+import json
 from disco.core import Job, result_iterator
 
 def map(line, params):
