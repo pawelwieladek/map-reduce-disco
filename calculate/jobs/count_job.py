@@ -37,6 +37,7 @@ if __name__ == "__main__":
                 "provider": word[0],
                 "channel": word[1]
             }
+        }
         data.append(datapoint)
 
     # POST to OpenTSDB
